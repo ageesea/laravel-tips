@@ -372,7 +372,7 @@ $users = DB::table('users')->get();
 
 If you need to execute a simple SQL query, without getting any results - like changing something in DB schema, you can just do `DB::statement()`.
 
-```
+```php
 DB::statement('DROP TABLE users');
 DB::statement('ALTER TABLE projects AUTO_INCREMENT=123');
 ```
@@ -442,7 +442,7 @@ class Post extends Model
 Tip given by [@syofyanzuhad](https://github.com/syofyanzuhad)
 
 To change the format of `created_at` you can add a method in your model like this:
-```
+```php
 public function getCreatedAtFormattedAttribute()
 {
    return $this->created_at->format('H:i d, M Y');
@@ -452,7 +452,7 @@ So you can use it `$entry->created_at_formatted` when it's needed.
 It will return the `created_at` attribute like this: `04:19 23, Aug 2020`.
 
 And also for changing format of `updated_at` attribute, you can add this method :
-```
+```php
 public function getUpdatedAtFormattedAttribute()
 {
    return $this->updated_at->format('H:i d, M Y');
@@ -467,7 +467,7 @@ Tip given by [@pratiksh404](https://github.com/pratiksh404)
 
 If you have input field which takes an array and you have to store it as a JSON, you can use `$casts` property in your model. Here `images` is a JSON attribute.
 
-```
+```php
 protected $casts = [
     'images' => 'array',
 ];
@@ -802,7 +802,7 @@ In many-to-many relationship, your pivot table may contain extra fields, and eve
 
 Then generate a separate Pivot Model:
 
-```
+```bash
 php artisan make:model RoleUser --pivot
 ```
 
@@ -974,6 +974,8 @@ php artisan make:migration "create transactions table"
 Source: [Steve O on Twitter](https://twitter.com/stephenoldham/status/1353647972991578120)
 
 ### Create Column after Another Column
+
+_Notice: Only MySQL_
 
 If you're adding a new column to the existing table, it doesn't necessarily has to become the last in the list. You can specify, after which column it should be created:
 
@@ -1226,7 +1228,7 @@ public function getRouteKeyName() {
 
 ### Quickly Navigate from Routes file to Controller
 
-This thing was optional before Laravel 8, and became a standart main syntax of routing in Laravel 8.
+This thing was optional before Laravel 8, and became a standard main syntax of routing in Laravel 8.
 
 Instead of routing like this:
 ```php
@@ -2087,7 +2089,7 @@ return redirect()->action('SomeController@method', ['param' => $value]);
 
 If you want to use OLDER version instead of the newest Laravel, use this command:
 
-```
+```bash
 composer create-project --prefer-dist laravel/laravel project "7.*"
 ```
 
@@ -2097,7 +2099,7 @@ Change 7.* to whichever version you want.
 
 In default Pagination links, you can pass additional parameters, preserve the original query string, or even point to a specific `#xxxxx` anchor. 
 
-```
+```blade
 {{ $users->appends(['sort' => 'votes'])->links() }}
 
 {{ $users->withQueryString()->links() }}
